@@ -27,7 +27,13 @@ public class Game
     
     public int totalScore()
     {
-        return frames[0].GetRolls().Sum();
+        int frameSum = 0;
+        foreach (var f in frames)
+        {
+            frameSum = frameSum + f.GetRolls().Sum();
+
+        }
+        return frameSum;
     }
 }
 

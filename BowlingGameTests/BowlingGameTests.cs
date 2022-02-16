@@ -31,5 +31,14 @@ namespace BowlingGameTests
             game.Roll(4);
             Assert.AreEqual(15, game.totalScore());
         }
+        
+        [Test]
+        public void WhenGameHasTwentyRollsWithTwoPinsEachThenCalculateScore()
+        {
+            Game game = new Game();
+            for(int i=1; i<=20; i++)
+                game.Roll(2);
+            Assert.AreEqual(40, game.totalScore());
+        }
     }
 }
