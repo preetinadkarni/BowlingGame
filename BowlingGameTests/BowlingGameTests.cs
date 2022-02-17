@@ -40,5 +40,15 @@ namespace BowlingGameTests
                 game.Roll(2);
             Assert.AreEqual(40, game.totalScore());
         }
+        
+        [Test]
+        public void WhenGameHasStrikeRollThenCalculateScore()
+        {
+            Game game = new Game();
+            game.Roll(10);
+            game.Roll(2);
+            game.Roll(4);
+            Assert.AreEqual(22, game.totalScore());
+        }
     }
 }
