@@ -16,7 +16,7 @@ public class Game
     public void Roll(int pins)
     {
         frames[currentFrame].SetRolls(pins);
-        if (currentRoll == 2)
+        if (currentRoll == 2 || pins==10)
         {
             currentFrame++;
             currentRoll = 1;
@@ -27,15 +27,43 @@ public class Game
     
     public int totalScore()
     {
-        int frameSum = 0;
-        foreach (var f in frames)
+        int totalSum = 0;
+        int currentFrameIndex;
+        for(int i=0; i < 10; i++)
         {
-            frameSum = frameSum + f.GetRolls().Sum();
+            currentFrameIndex = i;
+            int frameScore = frames[currentFrameIndex].GetRolls().Sum();
+            
+            if (frameScore == 10)
+            {
+                bool isStrike = frames[currentFrameIndex].GetRolls().Count == 1;
+                if (isStrike)
+                {
+                    int strikeScore = CalculateStrikeScore(currentFrameIndex);
+                    frameScore = frameScore + strikeScore;
+                }
+            }
+            totalSum = totalSum + frameScore;
 
         }
-        return frameSum;
+        return totalSum;
     }
+    
+    
+    public int CalculateStrikeScore(int currentFrameIndex)
+    {
+        int firstRoll=0;
+        int secondRoll=0;
+        if (frames[currentFrameIndex + 1].GetRolls().Count == 2)
+            return frames[currentFrameIndex + 1].GetRolls().Sum();
+        
+        firstRoll=frames[currentFrameIndex + 1].GetRolls().First();
+        secondRoll = frames[currentFrameIndex + 2].GetRolls().First();
+        return firstRoll + secondRoll;
+    }
+
 }
+
 
 public class Frame
 {
