@@ -17,6 +17,11 @@ public class Game
     {
         if(_currentFrame<10)
             _frames[_currentFrame].SetRolls(pin);
+        SetIndexForNextRoll(pin);
+    }
+
+    private void SetIndexForNextRoll(int pin)
+    {
         if (_currentFrameRollIndex == 2 || pin == 10)
         {
             _currentFrame++;
@@ -25,7 +30,7 @@ public class Game
         else
             _currentFrameRollIndex++;
     }
-    
+
     public int TotalScore()
     {
         var totalSum = 0;
