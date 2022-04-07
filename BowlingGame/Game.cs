@@ -2,58 +2,69 @@ namespace BowlingGame;
 
 public class Game
 {
-    private Frame[] frames;
-    private int currentFrame = 0;
-    private int currentRoll=1;
+    private readonly Frame[] _frames;
+    private int _currentFrame = 0;
+    private int _currentFrameRollIndex=1;
 
     public Game()
     {
-        frames = new Frame[10];
+        _frames = new Frame[10];
         for(int id=0; id<10 ; id++)
-            frames[id] = new Frame();
+            _frames[id] = new Frame();
     }
 
-    public void Roll(int pins)
+    public void Roll(int pin)
     {
-        frames[currentFrame].SetRolls(pins);
-        if (currentRoll == 2)
+        if(_currentFrame<10)
+            _frames[_currentFrame].SetRolls(pin);
+        SetIndexForNextRoll(pin);
+    }
+
+    private void SetIndexForNextRoll(int pin)
+    {
+        if (_currentFrameRollIndex == 2 || pin == 10)
         {
-            currentFrame++;
-            currentRoll = 1;
+            _currentFrame++;
+            _currentFrameRollIndex = 1;
         }
         else
-            currentRoll++;
-    }
-    
-    public int totalScore()
-    {
-        return frames[0].GetRolls().Sum();
-    }
-}
-
-public class Frame
-{
-    private List<int> _rolls;
-    private int _score;
-
-    public int Score
-    {
-        get;
-        set;
+            _currentFrameRollIndex++;
     }
 
-    public void SetRolls(int pins)
+    public int TotalScore()
     {
-        _rolls.Add(pins);
+        var totalSum = 0;
+        for(int currentFrameIndex=0; currentFrameIndex < 10; currentFrameIndex++)
+        {
+            int frameScore = _frames[currentFrameIndex].GetRolls().Sum();
+            
+            if (frameScore == 10)
+            {
+                bool isStrike = _frames[currentFrameIndex].GetRolls().Count == 1;
+                frameScore += isStrike ?  CalculateStrikeScore(currentFrameIndex) : CalculateSpareScore(currentFrameIndex);
+            }
+            
+            totalSum +=  frameScore;
+
+        }
+        return totalSum;
     }
 
-    public List<int> GetRolls()
+    private int CalculateSpareScore(int currentFrameIndex)
     {
-        return _rolls;
+        return _frames[currentFrameIndex + 1].GetRolls().First();
     }
 
-    public Frame()
+
+    public int CalculateStrikeScore(int currentFrameIndex)
     {
-        _rolls = new List<int>{};
+        int firstRoll=0;
+        int secondRoll=0;
+        if (_frames[currentFrameIndex + 1].GetRolls().Count == 2)
+            return _frames[currentFrameIndex + 1].GetRolls().Sum();
+        
+        firstRoll=_frames[currentFrameIndex + 1].GetRolls().First();
+        secondRoll = _frames[currentFrameIndex + 2].GetRolls().First();
+        return firstRoll + secondRoll;
     }
 }
