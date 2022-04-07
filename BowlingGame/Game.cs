@@ -18,6 +18,7 @@ public class Game
         if(_currentFrame<10)
             _frames[_currentFrame].SetRolls(pin);
         SetIndexForNextRoll(pin);
+        
     }
 
     private void SetIndexForNextRoll(int pin)
