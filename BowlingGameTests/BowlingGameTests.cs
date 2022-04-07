@@ -12,12 +12,21 @@ namespace BowlingGameTests
         }
 
         [Test]
+        public void WhenGameHasGutterThenCalculateScore()
+        {
+            Game game = new Game();
+            game.Roll(0);
+            game.Roll(0);
+            Assert.AreEqual(0, game.TotalScore());
+        }
+        
+        [Test]
         public void WhenGameHasTwoRollsThenCalculateScore()
         {
             Game game = new Game();
              game.Roll(5);
              game.Roll(4);
-            Assert.AreEqual(9, game.totalScore());
+            Assert.AreEqual(9, game.TotalScore());
         }
 
 
@@ -29,7 +38,7 @@ namespace BowlingGameTests
             game.Roll(2);
             game.Roll(4);
             game.Roll(4);
-            Assert.AreEqual(15, game.totalScore());
+            Assert.AreEqual(15, game.TotalScore());
         }
         
         [Test]
@@ -38,7 +47,7 @@ namespace BowlingGameTests
             Game game = new Game();
             for(int i=1; i<=20; i++)
                 game.Roll(2);
-            Assert.AreEqual(40, game.totalScore());
+            Assert.AreEqual(40, game.TotalScore());
         }
         
         [Test]
@@ -48,7 +57,7 @@ namespace BowlingGameTests
             game.Roll(10);
             game.Roll(2);
             game.Roll(4);
-            Assert.AreEqual(22, game.totalScore());
+            Assert.AreEqual(22, game.TotalScore());
         }
         
         [Test]
@@ -59,7 +68,7 @@ namespace BowlingGameTests
             game.Roll(10);
             game.Roll(2);
             game.Roll(4);
-            Assert.AreEqual(44, game.totalScore());
+            Assert.AreEqual(44, game.TotalScore());
         }
         
         [Test]
@@ -70,7 +79,7 @@ namespace BowlingGameTests
             game.Roll(5);
             game.Roll(2);
             game.Roll(4);
-            Assert.AreEqual(18, game.totalScore());
+            Assert.AreEqual(18, game.TotalScore());
         }
     }
 }
