@@ -12,74 +12,23 @@ namespace BowlingGameTests
         }
 
         [Test]
-        public void WhenGameHasGutterThenCalculateScore()
+        public void WhenGameHasOneRollsWithFivePinsThenCalculateScore()
         {
             Game game = new Game();
-            game.Roll(0);
-            game.Roll(0);
-            Assert.AreEqual(0, game.TotalScore());
-        }
-        
-        [Test]
-        public void WhenGameHasTwoRollsThenCalculateScore()
-        {
-            Game game = new Game();
-             game.Roll(5);
-             game.Roll(4);
-            Assert.AreEqual(9, game.TotalScore());
+            game.Roll(5);
+            game.Roll(2);
+            Assert.AreEqual(7, game.totalScore());
         }
 
 
         [Test]
-        public void WhenGameHasFourRollsWithDifferentPinsThenCalculateScore()
-        {
-            Game game = new Game();
-            game.Roll(5);
-            game.Roll(2);
-            game.Roll(4);
-            game.Roll(4);
-            Assert.AreEqual(15, game.TotalScore());
-        }
-        
-        [Test]
-        public void WhenGameHasTwentyRollsWithTwoPinsEachThenCalculateScore()
-        {
-            Game game = new Game();
-            for(int i=1; i<=20; i++)
-                game.Roll(2);
-            Assert.AreEqual(40, game.TotalScore());
-        }
-        
-        [Test]
-        public void WhenGameHasStrikeRollThenCalculateScore()
-        {
-            Game game = new Game();
-            game.Roll(10);
-            game.Roll(2);
-            game.Roll(4);
-            Assert.AreEqual(22, game.TotalScore());
-        }
-        
-        [Test]
-        public void WhenGameHasConsecutiveTwoStrikeRollThenCalculateScore()
-        {
-            Game game = new Game();
-            game.Roll(10);
-            game.Roll(10);
-            game.Roll(2);
-            game.Roll(4);
-            Assert.AreEqual(44, game.TotalScore());
-        }
-        
-        [Test]
-        public void WhenGameHasSpareThenCalculateScore()
+        public void WhenGameHasTWoRollsWithFivePinsThenCalculateScore()
         {
             Game game = new Game();
             game.Roll(5);
             game.Roll(5);
-            game.Roll(2);
-            game.Roll(4);
-            Assert.AreEqual(18, game.TotalScore());
+            Assert.AreEqual(10, game.totalScore());
         }
+        
     }
 }
