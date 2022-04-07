@@ -28,7 +28,7 @@ public class Game
     public int totalScore()
     {
         int totalSum = 0;
-        int currentFrameIndex;
+        int currentFrameIndex = 0 ;
         for(int i=0; i < 10; i++)
         {
             currentFrameIndex = i;
@@ -40,10 +40,15 @@ public class Game
                 if (isStrike)
                 {
                     int strikeScore = CalculateStrikeScore(currentFrameIndex);
-                    frameScore = frameScore + strikeScore;
+                    frameScore += + strikeScore;
+                }
+                else
+                {
+                    int spareScore = frames[currentFrameIndex + 1].GetRolls().First();
+                    frameScore += + spareScore;
                 }
             }
-            totalSum = totalSum + frameScore;
+            totalSum +=  frameScore;
 
         }
         return totalSum;

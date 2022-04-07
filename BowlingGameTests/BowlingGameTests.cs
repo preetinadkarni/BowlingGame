@@ -12,12 +12,12 @@ namespace BowlingGameTests
         }
 
         [Test]
-        public void WhenGameHasTwoRollsWithFivePinsEachThenCalculateScore()
+        public void WhenGameHasTwoRollsThenCalculateScore()
         {
             Game game = new Game();
              game.Roll(5);
-             game.Roll(5);
-            Assert.AreEqual(10, game.totalScore());
+             game.Roll(4);
+            Assert.AreEqual(9, game.totalScore());
         }
 
 
@@ -60,6 +60,17 @@ namespace BowlingGameTests
             game.Roll(2);
             game.Roll(4);
             Assert.AreEqual(44, game.totalScore());
+        }
+        
+        [Test]
+        public void WhenGameHasSpareThenCalculateScore()
+        {
+            Game game = new Game();
+            game.Roll(5);
+            game.Roll(5);
+            game.Roll(2);
+            game.Roll(4);
+            Assert.AreEqual(18, game.totalScore());
         }
     }
 }
